@@ -2,21 +2,18 @@ const express = require("express")
 
 const app = express();
 
+// : means dynamic routing
 
-app.get("/user",(req,res)=>{
-    res.send({firstName:"Duregsh", lastName:"Agrahari"});
-})
-app.post("/user",(req,res)=>{
-    console.log("Save Data to Database");
-    res.status(200).json("Data successfully save to the database");
-})
-
-app.delete("/user",(req,res)=>{
-    res.send("User deleted successfully!")
-})
-
-app.use("/test",(req,res)=>{
+app.use("/user",(req,res,next)=>{
+    // this is route handler function1
+    console.log("Handeling response1");
+    next()
     res.send("Hello from the server!!")
+},
+(req,res)=>{
+    // this is route handler function2
+    console.log("Handeling response2");
+    res.send("Hello from the server2!!")
 })
 
 app.listen(3000,()=>{
